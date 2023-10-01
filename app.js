@@ -111,6 +111,10 @@ app.post('/login',async (req,res)=>{
     }
     const token=jwt.sign(payload,"secret token",{expiresIn: "365d"})
     const todo=await todos.findOne({author:found._id})
+    let todos=[];
+    if(todo.todos){
+        todos=todo.todos
+    }
     return res.send({
         success:true,
         message:'logged in successfully',
@@ -119,7 +123,7 @@ app.post('/login',async (req,res)=>{
             username: found.username,
             token:'Bearer '+token
         },
-        todos:[...todo.todos]
+        todos:[...todos]
     })
 })
 
