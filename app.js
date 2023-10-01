@@ -111,9 +111,9 @@ app.post('/login',async (req,res)=>{
     }
     const token=jwt.sign(payload,"secret token",{expiresIn: "365d"})
     const todo=await todos.findOne({author:found._id})
-    let todos=[];
+    let currtodos=[];
     if(todo.todos){
-        todos=todo.todos
+        currtodos=todo.todos
     }
     return res.send({
         success:true,
@@ -123,7 +123,7 @@ app.post('/login',async (req,res)=>{
             username: found.username,
             token:'Bearer '+token
         },
-        todos:[...todos]
+        todos:[...currtodos]
     })
 })
 
