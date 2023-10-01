@@ -111,6 +111,7 @@ app.post('/login',async (req,res)=>{
     }
     const token=jwt.sign(payload,"secret token",{expiresIn: "365d"})
     const todo=await todos.findOne({author:found._id})
+    console.log(todo)
     let currtodos=todo.todos || [];
     return res.send({
         success:true,
